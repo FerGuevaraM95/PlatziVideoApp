@@ -6,27 +6,31 @@
 import React, {useState, useEffect} from 'react';
 import {Text} from 'react-native';
 
+import API from './utils/api';
 import Home from './src/screens/containers/home';
 import Header from './src/sections/components/header';
 import SuggestionList from './src/videos/containers/suggestion-list';
-import API from './utils/api';
+import CategoryList from './src/videos/containers/category-list';
 
 const App: () => React$Node = () => {
-  const [suggestionList, getSuggestionList] = useState([]);
+  const [suggestionList, setSuggestionList] = useState([]);
+  const [categoriesList, setCategories] = useState([]);
+
   useEffect(() => {
-    async function getMovies() {
+    async function getData() {
       const movies = await API.getSuggestion(10);
-      // console.log(movies);
-      getSuggestionList(movies);
+      const categories = await API.getMovies();
+      setSuggestionList(movies);
+      setCategories(categories);
     }
-    getMovies();
+    getData();
   }, []);
   return (
     <>
       <Home>
         <Header />
         <Text>Buscador</Text>
-        <Text>Categorías</Text>
+        <CategoryList list={categoriesList} />
         <SuggestionList list={suggestionList} />
       </Home>
     </>

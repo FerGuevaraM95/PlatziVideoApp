@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   View,
-  Text,
   Image,
   StyleSheet,
   StatusBar,
@@ -9,7 +8,7 @@ import {
   Platform,
 } from 'react-native';
 
-function Header({children}) {
+const Header = ({children}) => {
   return (
     <View>
       <StatusBar barStyle="dark-content" />
