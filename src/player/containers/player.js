@@ -1,12 +1,23 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, ActivityIndicator} from 'react-native';
 import Video from 'react-native-video';
 
 import Layout from '../components/layout';
 
 const Player = _ => {
+  const [loading, changeLoading] = useState(true);
+
+  const onBuffer = ({isBuffering}) => {
+    changeLoading(isBuffering);
+  };
+
+  const onLoad = () => {
+    changeLoading(false);
+  }
+
   return (
     <Layout
+      loading={loading}
       video={
         <Video
           style={styles.video}
@@ -14,8 +25,11 @@ const Player = _ => {
             uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
           }}
           resizeMode="contain"
+          onBuffer={onBuffer}
+          onLoad={onLoad}
         />
       }
+      loader={<ActivityIndicator color="red" />}
     />
   );
 }

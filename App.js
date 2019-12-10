@@ -30,6 +30,7 @@ const App: () => React$Node = () => {
     <>
       <Home>
         <Header />
+        <Player />
         <Text>Buscador</Text>
         <CategoryList list={categoriesList} />
         <SuggestionList list={suggestionList} />
