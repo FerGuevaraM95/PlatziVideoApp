@@ -4,7 +4,7 @@ import {Text, ImageBackground, StyleSheet, Platform} from 'react-native';
 function Category({genres, background_image}) {
   return (
     <ImageBackground style={styles.wrapper} source={{uri: background_image}}>
-      <Text style={styles.genre}>{genres[0]}</Text>
+      <Text style={styles.genre}>{genres ? genres[0] : 'No Category'}</Text>
     </ImageBackground>
   );
 }
