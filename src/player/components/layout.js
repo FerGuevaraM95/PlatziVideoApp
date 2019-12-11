@@ -1,11 +1,12 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-const Layout = ({video, loading, loader}) => {
+const Layout = ({video, loading, loader, controls}) => {
   return (
     <View style={styles.container}>
       <View style={styles.video}>{video}</View>
       <View style={styles.overlay}>{loading && loader}</View>
+      {controls}
     </View>
   );
 };

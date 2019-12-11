@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
-import {StyleSheet, ActivityIndicator} from 'react-native';
+import {Text, StyleSheet, ActivityIndicator} from 'react-native';
 import Video from 'react-native-video';
 
 import Layout from '../components/layout';
+import ControlLayout from '../components/control-layout';
+import PlayPause from '../components/play-pause';
 
 const Player = _ => {
   const [loading, changeLoading] = useState(true);
+  const [paused, togglePaused] = useState(false);
 
   const onBuffer = ({isBuffering}) => {
     changeLoading(isBuffering);
@@ -13,6 +16,10 @@ const Player = _ => {
 
   const onLoad = () => {
     changeLoading(false);
+  };
+
+  const playPause = () => {
+    togglePaused(!paused);
   }
 
   return (
@@ -27,9 +34,18 @@ const Player = _ => {
           resizeMode="contain"
           onBuffer={onBuffer}
           onLoad={onLoad}
+          paused={paused}
         />
       }
       loader={<ActivityIndicator color="red" />}
+      controls={
+        <ControlLayout>
+          <PlayPause onPress={playPause} paused={paused} />
+          <Text>progress bar | </Text>
+          <Text>time left | </Text>
+          <Text>fullscreen | </Text>
+        </ControlLayout>
+      }
     />
   );
 }
