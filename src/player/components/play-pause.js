@@ -3,46 +3,56 @@ import {
   Text,
   StyleSheet,
   TouchableHighlight,
+  Platform,
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const PlayPause = ({onPress, paused}) => {
   return (
     <TouchableHighlight
       onPress={onPress}
       style={styles.container}
-      underlayColor="red"
+      underlayColor="rgba(255,255,255,.3)"
       hitSlop={{
-        left: 5,
-        top: 5,
-        bottom: 5,
-        right: 5,
+        left: 10,
+        top: 10,
+        bottom: 10,
+        right: 10,
       }}>
-      {paused ? 
-        <Text style={styles.button}>Play</Text>
-        : <Text style={styles.button}>Pause</Text>}
+      {paused ? (
+        <Icon
+          size={20}
+          color="#98ca3f"
+          name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'}
+        />
+      ) : (
+        <Icon
+          size={20}
+          color="#98ca3f"
+          name={Platform.OS === 'ios' ? 'ios-pause' : 'md-pause'}
+        />
+      )}
     </TouchableHighlight>
   );
-}
+};
 
 const styles = StyleSheet.create({
   button: {
     color: 'white',
     fontSize: 10,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   container: {
     justifyContent: 'center',
-    paddingHorizontal: 10,
+    paddingHorizontal: 7,
     height: 25,
-    marginRight: 10,
+    marginRight: 8,
     marginVertical: 5,
-    borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 4,
     borderColor: 'white',
-    backgroundColor: 'gray'
-  }
-})
+  },
+});
 
 export default PlayPause;
